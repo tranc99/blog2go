@@ -1,11 +1,5 @@
 #lang web-server/insta
-(define (start request)
-  (response/xexpr
-   '(html
-     (head (title "My Blog"))
-     (body (h1 "Under construction")
-           (h2 "Now we're rockin")
-           (p "I walk along the boulevard of Broken Dreams it's the only one I know")))))
+
 
 ; A blog is a (listof post)
 ; and a post is a (post title body)
@@ -34,6 +28,17 @@
 
 ; render-post: post -> xexpr
 ; consumes a post, produces an xexpr fragment of the post.
-(define 
+(define (render-post a-post)
+  `(div ((class "post"))
+        ,(post-title a-post)
+        (p , (post-body a-post))))
+
+; render-posts: blog -> xexpr
+; consumes a blog, produces an xexpr fragment of all its posts
+(define (render-posts a-blog)
+  `(div ((class "posts"))
+        ,@(map render-post a-blog)))
+
+
 
 
